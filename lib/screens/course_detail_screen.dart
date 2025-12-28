@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
+import 'theory_screen.dart';
 
 class CourseDetailScreen extends StatelessWidget {
   final String courseName;
@@ -353,63 +354,104 @@ class CourseDetailScreen extends StatelessWidget {
                   ...modules.map((module) {
                     final isCompleted = module['completed'] ?? false;
                     final topics = module['topics'] as List? ?? [];
+                    final moduleId = module['id'] ?? 0;
                     
                     return Card(
                       margin: const EdgeInsets.only(bottom: 12),
                       elevation: 2,
-                      child: ExpansionTile(
-                        leading: CircleAvatar(
-                          backgroundColor: isCompleted ? Colors.green : Colors.grey[300],
-                          child: Icon(
-                            isCompleted ? Icons.check : Icons.lock_outline,
-                            color: isCompleted ? Colors.white : Colors.grey,
-                          ),
-                        ),
-                        title: Text(
-                          module['title'] ?? '',
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        subtitle: Text(
-                          module['duration'] ?? '',
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: Colors.grey,
-                          ),
-                        ),
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  'Topik:',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                                const SizedBox(height: 8),
-                                ...topics.map((topic) => Padding(
-                                  padding: const EdgeInsets.only(bottom: 4),
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.circle,
-                                        size: 8,
-                                        color: courseColor,
-                                      ),
-                                      const SizedBox(width: 8),
-                                      Text(topic.toString()),
-                                    ],
-                                  ),
-                                )),
-                              ],
+                      child: InkWell(
+                        onTap: () {
+                          // Navigate to theory screen
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => TheoryScreen(
+                                courseName: courseName,
+                                moduleTitle: module['title'] ?? '',
+                                moduleId: moduleId,
+                                courseColor: courseColor,
+                              ),
+                            ),
+                          );
+                        },
+                        child: ExpansionTile(
+                          leading: CircleAvatar(
+                            backgroundColor: isCompleted ? Colors.green : Colors.grey[300],
+                            child: Icon(
+                              isCompleted ? Icons.check : Icons.lock_outline,
+                              color: isCompleted ? Colors.white : Colors.grey,
                             ),
                           ),
-                        ],
+                          title: Text(
+                            module['title'] ?? '',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          subtitle: Row(
+                            children: [
+                              Text(
+                                module['duration'] ?? '',
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              if (!isCompleted)
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 2,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.orange.withOpacity(0.2),
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: const Text(
+                                    'Mulai Belajar',
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      color: Colors.orange,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                            ],
+                          ),
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    'Topik:',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  ...topics.map((topic) => Padding(
+                                    padding: const EdgeInsets.only(bottom: 4),
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          Icons.circle,
+                                          size: 8,
+                                          color: courseColor,
+                                        ),
+                                        const SizedBox(width: 8),
+                                        Text(topic.toString()),
+                                      ],
+                                    ),
+                                  )),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   }).toList(),
