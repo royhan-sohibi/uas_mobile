@@ -8,7 +8,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Beranda'),
+        title: const Text('Selamat Datang, User'),
         actions: [
           // Profile button on top right
           Padding(
@@ -70,13 +70,29 @@ class HomeScreen extends StatelessWidget {
               _buildIncomingTaskCard(),
               const SizedBox(height: 24),
               
-              // Courses Progress Section
-              const Text(
-                'Progres Kursus',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+              // Popular Courses Section
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Kursus Populer',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      // Navigate to courses screen
+                    },
+                    child: const Text(
+                      'Lihat Semua',
+                      style: TextStyle(
+                        color: Color(0xFFB71C1C),
+                      ),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 12),
               _buildCoursesList(),
@@ -159,6 +175,13 @@ class HomeScreen extends StatelessWidget {
   Widget _buildCoursesList() {
     final courses = [
       {
+        'name': 'Sistem Operasi',
+        'progress': 0.85,
+        'completed': 17,
+        'total': 20,
+        'color': Colors.orange,
+      },
+      {
         'name': 'Pemrograman Web',
         'progress': 0.75,
         'completed': 15,
@@ -171,20 +194,6 @@ class HomeScreen extends StatelessWidget {
         'completed': 12,
         'total': 20,
         'color': Colors.green,
-      },
-      {
-        'name': 'Matematika Diskrit',
-        'progress': 0.40,
-        'completed': 8,
-        'total': 20,
-        'color': Colors.purple,
-      },
-      {
-        'name': 'Sistem Operasi',
-        'progress': 0.85,
-        'completed': 17,
-        'total': 20,
-        'color': Colors.orange,
       },
     ];
 

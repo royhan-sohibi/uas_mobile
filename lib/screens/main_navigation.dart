@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'home_screen.dart';
-import 'notification_screen.dart';
-import 'profile_screen.dart';
+import 'courses_screen.dart';
+import 'settings_screen.dart';
 
 class MainNavigation extends StatefulWidget {
   const MainNavigation({super.key});
@@ -15,8 +15,8 @@ class _MainNavigationState extends State<MainNavigation> {
 
   final List<Widget> _screens = [
     const HomeScreen(),
-    const NotificationScreen(),
-    const ProfileScreen(),
+    const CoursesScreen(),
+    const SettingsScreen(),
   ];
 
   @override
@@ -39,12 +39,12 @@ class _MainNavigationState extends State<MainNavigation> {
             label: 'Beranda',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            label: 'Notifikasi',
+            icon: Icon(Icons.school),
+            label: 'Kursus',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profil',
+            icon: Icon(Icons.settings),
+            label: 'Pengaturan',
           ),
         ],
       ),
