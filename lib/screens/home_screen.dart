@@ -96,7 +96,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 12),
-              _buildCoursesList(),
+              _buildCoursesList(context),
             ],
           ),
         ),
@@ -173,7 +173,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildCoursesList() {
+  Widget _buildCoursesList(BuildContext context) {
     final courses = [
       {
         'name': 'Sistem Operasi',
