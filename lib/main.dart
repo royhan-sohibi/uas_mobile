@@ -11,11 +11,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'My Shopping App',
+      title: 'CEVOS',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        primaryColor: const Color(0xFFB71C1C),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFFB71C1C),
+          primary: const Color(0xFFB71C1C),
+        ),
         useMaterial3: true,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFFB71C1C),
+          foregroundColor: Colors.white,
+        ),
       ),
       home: const SplashScreen(),
     );
